@@ -4,6 +4,10 @@
   </div>
 </div>
 
-<app-login-form (onSubmitLoginEvent)="onLogin($event)"></app-login-form>
+<app-login-form
+  (onSubmitLoginEvent)="onLogin($event)"
+  (onSubmitRegisterEvent)="onRegister($event)"
+/>
+
 
 <!--<app-auth-content></app-auth-content>-->

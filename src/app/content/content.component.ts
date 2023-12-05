@@ -28,4 +28,17 @@ export class ContentComponent {
     )
 
   }
+
+  onRegister(input: any) {
+    this.axiosService.request(
+      "POST",
+      "/login",
+      {
+        firstName: input.firstName,
+        lastName: input.lastName,
+        login: input.login,
+        password: input.password
+      }
+    )
+  }
 }
