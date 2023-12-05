@@ -20,7 +20,7 @@ export class ContentComponent {
   onLogin(input: any) {
     this.axiosService.request(
       "POST",
-      "/login",
+      "/v1/login",
       {
         login: input.login,
         password: input.password
@@ -32,7 +32,7 @@ export class ContentComponent {
   onRegister(input: any) {
     this.axiosService.request(
       "POST",
-      "/login",
+      "/v1/register",
       {
         firstName: input.firstName,
         lastName: input.lastName,
