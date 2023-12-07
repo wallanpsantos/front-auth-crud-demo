@@ -19,10 +19,19 @@ export class AuthContentComponent {
   ngOnInit(): void {
     this.axiosService.request(
       "GET",
-      "/v1/informations",
+      "/v1/messages",
       {}
     ).then(
-      (response) => this.data = response.data
+      (response) => {
+        this.data = response.data;
+      }).catch(
+      (error) => {
+        if (error.response.status === 401) {
+          this.axiosService.setAuthToken(null)
+        } else {
+          this.data = error.response.code
+        }
+      }
     )
   }
 }

@@ -6,30 +6,11 @@ import axios from "axios";
 })
 export class AxiosService {
 
-  private readonly AUTH_TOKEN_KEY = 'auth_token';
+  private readonly AUTH_TOKEN_KEY = "auth_token";
 
   constructor() {
     axios.defaults.baseURL = 'http://localhost:8080';
     axios.defaults.headers.post['Content-Type'] = 'application/json';
-  }
-
-  request(method: string, url: string, data: any): Promise<any> {
-
-    let headers = {}
-
-    const authToken = this.getAuthToken();
-
-    /* Cabeçalho de autorização caso token estiver presente em localstorage */
-    if (authToken !== null) {
-      headers = {"Authorization": `Bearer  ${authToken}`}
-    }
-
-    return axios({
-      method: method,
-      url: url,
-      data: data,
-      headers: headers
-    })
   }
 
   /* Gerenciar o acesso ao armazenamento local */
@@ -43,5 +24,21 @@ export class AxiosService {
     } else {
       window.localStorage.removeItem(this.AUTH_TOKEN_KEY)
     }
+  }
+
+  request(method: string, url: string, data: any): Promise<any> {
+    let headers = {}
+
+    /* Cabeçalho de autorização caso token estiver presente em localstorage */
+    if (this.getAuthToken() !== null) {
+      headers = {"Authorization": "Bearer " + this.getAuthToken()};
+    }
+
+    return axios({
+      method: method,
+      url: url,
+      data: data,
+      headers: headers
+    })
   }
 }
