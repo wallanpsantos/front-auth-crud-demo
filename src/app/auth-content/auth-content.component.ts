@@ -19,7 +19,7 @@ export class AuthContentComponent {
   ngOnInit(): void {
     this.axiosService.request(
       "GET",
-      "/v1/messages",
+      "/v1/informations",
       {}
     ).then(
       (response) => {
