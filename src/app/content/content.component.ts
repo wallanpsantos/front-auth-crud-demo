@@ -4,15 +4,17 @@ import {WelcomeContentComponent} from "../welcome-content/welcome-content.compon
 import {LoginFormComponent} from "../login-form/login-form.component";
 import {AxiosService} from "../axios.service";
 import {AuthContentComponent} from "../auth-content/auth-content.component";
+import {ButtonsComponent} from "../buttons/buttons.component";
 
 @Component({
   selector: 'app-content',
   standalone: true,
-  imports: [CommonModule, WelcomeContentComponent, LoginFormComponent, AuthContentComponent],
+  imports: [CommonModule, WelcomeContentComponent, LoginFormComponent, AuthContentComponent, ButtonsComponent],
   templateUrl: './content.component.html',
   styleUrl: './content.component.scss'
 })
 export class ContentComponent {
+  componentToShow: string = "welcome";
 
   constructor(private axiosService: AxiosService) {
   }
@@ -25,7 +27,11 @@ export class ContentComponent {
         login: input.login,
         password: input.password
       }
-    )
+    ).then(response => {
+      /* Salva na resposta do login o token JWT configurado no axios.service */
+      this.axiosService.setAuthToken(response.data.token)
+      this.componentToShow = "messages"
+    })
 
   }
 
@@ -39,6 +45,14 @@ export class ContentComponent {
         login: input.login,
         password: input.password
       }
-    )
+    ).then(response => {
+      /* Salva na resposta do Registro do usuario o token JWT configurado no axios.service */
+      this.axiosService.setAuthToken(response.data.token)
+      this.componentToShow = "messages"
+    })
+  }
+
+  showComponent(componentToShow: string) {
+    this.componentToShow = componentToShow;
   }
 }

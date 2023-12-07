@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, EventEmitter, Output} from '@angular/core';
 import {CommonModule} from '@angular/common';
 
 @Component({
@@ -9,5 +9,8 @@ import {CommonModule} from '@angular/common';
   styleUrl: './buttons.component.scss'
 })
 export class ButtonsComponent {
+
+  @Output() loginEvent = new EventEmitter();
+  @Output() logoutEvent = new EventEmitter();
 
 }

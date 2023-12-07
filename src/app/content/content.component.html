@@ -4,10 +4,17 @@
   </div>
 </div>
 
-<app-login-form
-  (onSubmitLoginEvent)="onLogin($event)"
-  (onSubmitRegisterEvent)="onRegister($event)"
+<app-buttons (loginEvent)="showComponent('login')"
+             (logoutEvent)="showComponent('welcome')"/>
+
+<app-welcome-content *ngIf="componentToShow == 'welcome'"/>
+
+<app-login-form *ngIf="componentToShow == 'login'"
+                (onSubmitLoginEvent)="onLogin($event)"
+                (onSubmitRegisterEvent)="onRegister($event)"
 />
+
+<app-auth-content *ngIf="componentToShow == 'messages'"/>
 
 
 <!--<app-auth-content></app-auth-content>-->
